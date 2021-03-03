@@ -13,9 +13,10 @@ function getSearchResults () {
 $(document).on("keypress", "input", function(e){
     if(e.which == 13){
         var inputVal = $(this).val();
-        alert("You've entered: " + inputVal);
+        searchWeather (inputVal);
+        // alert("You've entered: " + inputVal);
         // $(this).value = '';
-        document.getElementById('city-search').value = '';
+        $(this).val('');
         console.log ("clear");
     }
     // return(searchString)
@@ -32,8 +33,8 @@ var humidity;
 var windspeed;
 var UVindex;
 var fiveDay = [] // date cloud temp humidity
-
-
+ 
+function searchWeather (searchString) {
 let fetchUrl=apiUrl+"?q="+searchString+"&APPID="+APPID;
 
 var array = fetch (fetchUrl, {
@@ -68,4 +69,4 @@ console.log (fetchUrl);
         console.log(data);
 })
 });
-
+}
