@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
     </head>
     <body>
+        
       <section class="hero is-small is-primary">
           <div class="hero-body">
             <p class="title has-text-centered">
@@ -17,70 +18,106 @@
             </p>
           </div>
         </section>
+
     <div class="columns">
       <section class="section column is-one-third">
-        <h1 class="title">left 1/3</h1>
-        <h2 class="subtitle">
-           I want to put search here.
-        </h2>
+          <div class="box">
+        <h1 class="title is-4">Search for a City</h1>
+        <form id="city-search"></form>
+        <p class="control has-icons-right">
+            <input class="input" type="text" placeholder="city name / zipcode">
+            <span class="icon is-small is-right">
+                <i class="fas fa-search"></i>
+              </span>
+        </p>
+        </form>
+        
+        <div class="column block">
+        </div>
+        <div class="column block">
+            Previous Search 1
+         </div>
+         <div class="column block">
+            Previous Search 2
+            
+         </div>
       </section>
       
       <section class="section">
         <div>
-            <div class="card">
-                <div class="card-content">
-                    <div class="content">
-                        current weather
-                    </div>
+            <div class="box">
+                <div class="title is-4">
+                    Current Weather
+                </div>
+                <div>
+                    Current Weather goes here
                 </div>
             </div>
-            <div class="card">
-                <div class="card-content">
-                    <div class="content">
-                        5-day forecast
-                    </div>
+
+            <div class="box">
+                <div class="title is-4">
+                    5 Day Forecast
                 </div>
-            </div>
+            
             
         <div class="columns">
             <div class="card">
                 <div class="card-content">
                     <div class="content">
-                        Weather Data
+                        Date<br>
+                        Icon<br>
+                        Temp:<br> 
+                        Humidity:
                     </div>
                 </div>
             </div>
             <div class="card">
                 <div class="card-content">
                     <div class="content">
-                        Weather Data
+                        Date<br>
+                        Icon<br>
+                        Temp:<br> 
+                        Humidity:
                     </div>
                 </div>
             </div>
             <div class="card">
                 <div class="card-content">
                     <div class="content">
-                        Weather Data
+                        Date<br>
+                        Icon<br>
+                        Temp:<br> 
+                        Humidity:
                     </div>
                 </div>
             </div>
             <div class="card">
                 <div class="card-content">
                     <div class="content">
-                        Weather Data
+                        Date<br>
+                        Icon<br>
+                        Temp:<br> 
+                        Humidity:
                     </div>
                 </div>
             </div>
             <div class="card">
                 <div class="card-content">
                     <div class="content">
-                        Weather Data
+                        Date<br>
+                        Icon<br>
+                        Temp:<br> 
+                        Humidity:
                     </div>
                 </div>
             </div>
         </div>
+        </div>
       </section>
 
-
+    </div>
     </body>
+    <script src="https://kit.fontawesome.com/737d647828.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+    <script src="assets/js/script.js"></script>
 </html>
