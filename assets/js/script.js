@@ -24,6 +24,7 @@ $(document).on("keypress", "input", function(e){
 };
 
 getSearchResults();
+myInterface();
 
 var searchString = "rock hill";
 var latCity;
@@ -35,38 +36,79 @@ var UVindex;
 var fiveDay = [] // date cloud temp humidity
  
 function searchWeather (searchString) {
-let fetchUrl=apiUrl+"?q="+searchString+"&APPID="+APPID;
+    let fetchUrl=apiUrl+"?q="+searchString+"&APPID="+APPID;
 
-var array = fetch (fetchUrl, {
-    method: 'GET', //GET is the default.
-    credentials: 'same-origin', // include, *same-origin, omit
-    redirect: 'follow', // manual, *follow, error
-})
-.then(function (response) {
-    console.log ("then response");
-    return response.json();    
-})
-.then(function (data) {
-    console.log ("data here");
-    console.log(data);
-    
-    let idCity = data.id;
-    console.log ("city name is "+data.name+" lat "+latCity+" lon "+lonCity);
-    
-    let fetchUrl=apiUrl2+"?id="+idCity+"&APPID="+APPID;
-console.log (fetchUrl);
     var array = fetch (fetchUrl, {
         method: 'GET', //GET is the default.
         credentials: 'same-origin', // include, *same-origin, omit
         redirect: 'follow', // manual, *follow, error
     })
-.then(function (response) {
+    .then(function (response) {
         console.log ("then response");
         return response.json();    
-})
-.then(function (data) {
+    })
+    .then(function (data) {
         console.log ("data here");
         console.log(data);
-})
-});
+        
+        let idCity = data.id;
+        console.log ("city name is "+data.name+" lat "+latCity+" lon "+lonCity);
+        
+        let fetchUrl=apiUrl2+"?id="+idCity+"&APPID="+APPID;
+    console.log (fetchUrl);
+        var array = fetch (fetchUrl, {
+            method: 'GET', //GET is the default.
+            credentials: 'same-origin', // include, *same-origin, omit
+            redirect: 'follow', // manual, *follow, error
+        })
+    .then(function (response) {
+            console.log ("then response");
+            return response.json();    
+    })
+    .then(function (data) {
+            console.log ("data here");
+            console.log(data);
+    })
+    });
+}
+
+function myInterface () {
+
+    //Search box historyu stuff
+
+    $("#search-history").append(` 
+        <div>
+            <button class="button makeit-100">
+                Javascript did this
+            </button>
+        </div>
+    `);
+
+
+// display the current forecast
+
+$("#current-weather").append(` 
+<div>
+    Current Weather Goes Here says Javascript
+</div>
+`);
+
+
+// display the five day forecast
+
+for (let i = 0; i < 5; i++ ) {
+$("#five-day-forecast").append(` 
+    <div class="card">
+        <div class="card-content">
+            <div class="content">
+                Date<br>
+                Icon<br>
+                Temp:<br> 
+                Humidity:
+            </div>
+        </div>
+    </div>
+`);
+}
+
 }
