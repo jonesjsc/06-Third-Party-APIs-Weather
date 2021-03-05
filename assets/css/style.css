@@ -1,3 +1,19 @@
 .makeit-100 {
     width: 100%;
 }
+.smaller-icon {
+    width: 2rem;
+    height: 2rem;
+}
+.uvi-green {
+    background-color: rgb(163, 255, 163);
+    color: black;
+}
+.uvi-yellow {
+    background-color: rgb(255, 255, 190);
+    color: black;
+}
+.uvi-red {
+    background-color: rgb(253, 123, 123);
+    color: black;
+}
