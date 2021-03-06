@@ -1,43 +1,67 @@
-console.log("running");
 const apiUrl = "http://api.openweathermap.org/data/2.5/weather";
-const apiUrl2 = "http://api.openweathermap.org/data/2.5/forecast";
 const apiUrl3 = "https://api.openweathermap.org/data/2.5/onecall";
 const APPID = "3fa7b2c1cbc30cd3a3619a313b9a2946";
+//
 // api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=3fa7b2c1cbc30cd3a3619a313b9a2946
 // api.openweathermap.org/data/2.5/forecast?id=524901&appid=3fa7b2c1cbc30cd3a3619a313b9a2946
 // https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
 // https://api.openweathermap.org/data/2.5/onecalllat=35.2271&lon=-80.8431&APPID=3fa7b2c1cbc30cd3a3619a313b9a2946
-// problems: 
-// 1. how to execute the search if they hit ENTER key OR click on the search icon
 //
+const maxSearchHistory = 5 // this is the number of unique searches savewd to localstorage and the search window
+
+//
+// lets setup local storage and related array
+//
+
+if (localStorage.getItem("MY_WEATHER_APP_SEARCH_HISTORY") === null) {
+    var searchHistory = [];
+    localStorage.setItem("MY_WEATHER_APP_SEARCH_HISTORY", JSON.stringify(searchHistory));
+} else {
+    var searchHistory = JSON.parse(localStorage.getItem("MY_WEATHER_APP_SEARCH_HISTORY"));
+}
+
+//
+// listener for the ENTER KEY so you can type your search and hit ENTER
+//
+
 function getSearchResults () {
-$(document).on("keypress", "input", function(e){
-    if(e.which == 13){
-        var inputVal = $(this).val();
-        searchWeather (inputVal);
-        // alert("You've entered: " + inputVal);
-        // $(this).value = '';
-        $(this).val('');
-        console.log ("clear");
-    }
-    // return(searchString)
+    $(document).on("keypress", "input", function(e){
+        if(e.which == 13){
+            var inputVal = $(this).val();
+            searchWeather (inputVal);
+            $(this).val('');
+        }
     })
 };
 
+//
+// click listener on the search history buttons
+//
+
+$("#search-history").click(function(e) {
+    searchWeather ($(e.target).text().trim());
+});
+
+
 getSearchResults();
-myInterface();
 
 var searchString = "rock hill";
 var latCity;
 var lonCity;
-var idCity;
 var humidity;
 var windspeed;
 var UVindex;
 var fiveDay = [] // date cloud temp humidity
  
+searchWeather("Rock Hill");
+
 function searchWeather (searchString) {
+
     let fetchUrl=apiUrl+"?q="+searchString+"&APPID="+APPID;
+
+    //
+    // this is the first fetch - we get lat and lon from this fetch
+    //
 
     var array = fetch (fetchUrl, {
         method: 'GET', //GET is the default.
@@ -47,41 +71,34 @@ function searchWeather (searchString) {
     .then(function (response) {
         return response.json();    
     })
-    .then(function (data) {
-        console.log(data);  
-        
-        // moment(timestamp, 'X').format('lll')
-        
-        // console.log ("currentData is"+currentDate);
-        let idCity = data.id;
+    .then(function (data) {       
         let latCity = data.coord.lat;
-        let lonCity = data.coord.lon;
-        console.log ("city name is "+data.name+" lat "+latCity+" lon "+lonCity);
-        
-        // let fetchUrl=apiUrl2+"?id="+idCity+"&APPID="+APPID;
+        let lonCity = data.coord.lon;   
         let fetchUrl=apiUrl3+"?lat="+latCity+"&lon="+lonCity+"&units=imperial&APPID="+APPID;
-    console.log (fetchUrl);
+    
+        //
+        // this is the subsequent fetch to get 5 day, and current uv
+        //
+
         var array = fetch (fetchUrl, {
             method: 'GET', //GET is the default.
             credentials: 'same-origin', // include, *same-origin, omit
             redirect: 'follow', // manual, *follow, error
         })
     .then(function (response) {
-            console.log ("then response");
             return response.json();    
     })
     .then(function (data2) {
-            console.log ("data here");
-            console.log(data2);
-
-            // current weather
-            // current weather icon 
-            console.log("ICON "+data2.current.weather[0].icon);
+            //
+            // there is some formatting that operweathermap does on the search string, so lets ride that 
+            // and set what we display based on what the city name we get back
+            //
+            var searchString2 = data.name; 
             let iconUrl="http://openweathermap.org/img/wn/"+data2.current.weather[0].icon+"@2x.png";
-            console.log (iconUrl);
 
-            $("#first-run-placeholder").hide();
-            // ${moment(data2.daily[0].dt, 'X').format('LL')}
+            //
+            // let's write out the current weather
+            //
 
             $("#current-weather").html(`
             <div class="title is-4">
@@ -105,12 +122,22 @@ function searchWeather (searchString) {
             <div>
                 Temperature: ${Math.round(data2.current.temp)} &#8457<br>
                 Humidify: ${data2.current.humidity} %<br>
-                Wind Speed:${Math.round(data2.current.wind_speed)} MPH<br>
+                Wind Speed: ${Math.round(data2.current.wind_speed)} MPH<br>
                 UV Index: <span class="${uvClass}">&nbsp;&nbsp;&nbsp;${data2.current.uvi}&nbsp;&nbsp;&nbsp;</span>
             </div>
             `);
 
+            //
+            // let's start by clearing out the five day forecast block
+            //
+
             $("#five-day-forecast").html(``);
+
+            //
+            // since we only want 5 days, and since index 0 is the current day, lets
+            // loop 1 through 6
+            //
+
             for (let i = 1; i < 6; i++ ) {
                 $("#five-day-forecast").append(` 
                     <div class="card">
@@ -131,51 +158,57 @@ function searchWeather (searchString) {
                     </div>
                 `);
                 }
+                
+                //
+                // let's load the LOCAL STORAGE search history
+                //
 
+                var searchHistory = JSON.parse(localStorage.getItem("MY_WEATHER_APP_SEARCH_HISTORY"));
 
+                //
+                // It looks dumb to keep up with the same search multiple times, so lets unshift only unique searches
+                //
+                if(jQuery.inArray(searchString2, searchHistory) == -1) {
+                    searchHistory.unshift(searchString2);
+                } 
+                else {
+                    searchHistory.splice(jQuery.inArray(searchString2, searchHistory),1);
+                    // then put it back on at the top
+                    searchHistory.unshift(searchString2);
+                }
 
-            
-    })
+                //
+                // We cant keep everything - so lets just keep maxSearchHistory number of historical searches
+                //
+
+                if (searchHistory.length > maxSearchHistory) {
+                    searchHistory.pop();
+                }
+                
+                //
+                // Update local storage with current searchHistory
+                //
+
+                localStorage.setItem("MY_WEATHER_APP_SEARCH_HISTORY", JSON.stringify(searchHistory));
+
+                //
+                // render the search history box by first clearing the search history box out
+                //
+
+                $("#search-history").html(``);
+
+                //
+                // lets loop through all the elements in the searchHistory array and render the search box
+                //
+
+                searchHistory.forEach(function(searchItem) {
+                    $("#search-history").append(` 
+                    <div>
+                        <button class="button makeit-100">
+                            ${searchItem}
+                        </button>
+                    </div>`);
+                });  
+        })
     });
-}
-
-function myInterface () {
-
-    //Search box historyu stuff
-
-    $("#search-history").append(` 
-        <div>
-            <button class="button makeit-100">
-                Javascript did this
-            </button>
-        </div>
-    `);
-
-
-// display the current forecast
-
-// $("#current-weather").append(` 
-// <div>
-//     Current Weather Goes Here says Javascript
-// </div>
-// `);
-
-
-// display the five day forecast
-
-// for (let i = 0; i < 5; i++ ) {
-// $("#five-day-forecast").append(` 
-//     <div class="card">
-//         <div class="card-content">
-//             <div class="content">
-//                 Date<br>
-//                 Icon<br>
-//                 Temp:<br> 
-//                 Humidity:
-//             </div>
-//         </div>
-//     </div>
-// `);
-// }
-
 }
