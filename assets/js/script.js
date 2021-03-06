@@ -1,4 +1,4 @@
-const apiUrl = "http://api.openweathermap.org/data/2.5/weather";
+const apiUrl = "https://api.openweathermap.org/data/2.5/weather";
 const apiUrl3 = "https://api.openweathermap.org/data/2.5/onecall";
 const APPID = "3fa7b2c1cbc30cd3a3619a313b9a2946";
 //
