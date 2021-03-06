@@ -42,6 +42,7 @@ $("#search-history").click(function(e) {
     searchWeather ($(e.target).text().trim());
 });
 
+searchWeather("Rock Hill");
 
 getSearchResults();
 
@@ -53,7 +54,6 @@ var windspeed;
 var UVindex;
 var fiveDay = [] // date cloud temp humidity
  
-searchWeather("Rock Hill");
 
 function searchWeather (searchString) {
 
