@@ -55,40 +55,40 @@ This is a simple Weather API exercise.  The default city that is shown is Rock H
 
 10. the button class in bulma stylized the mouse pointer to the finger.  When the user clicks on this button:
 
-### Screen 7: **Different Features**
+### Screen 7: **actions performed when clicking on search history (continued)**
 ![<img src=assets/images/screenshot07.png>](assets/images/screenshot07.png)
 
 11. we will perform the search, and pop the searched city to the top of the stack perserving a logical sort order.  Buttons are pushed down in the interface in an intuitive fashion.
 
-### Screen 8: **Different Features**
+### Screen 8: **Maximum number of searches**
 ![<img src=assets/images/screenshot08.png>](assets/images/screenshot08.png)
 
-12. The interface will preserve the 5 most recent historical searches.
+12. The interface will preserve the 5 most recent historical searches.  This is a tunable parameter via `maxSearchHistory`.
 
-### Screen 9: **Different Features**
+### Screen 9: **Maximum number of searches (continued)**
 ![<img src=assets/images/screenshot09.png>](assets/images/screenshot09.png)
 
 13. When we execute a search for a 6th city, we will truncate the history shoing on the more recent 5 searches.
 
-### Screen 10: **Different Features**
+### Screen 10: **Error handling**
 ![<img src=assets/images/screenshot10.png>](assets/images/screenshot10.png)
 
 14. Some basic error catching is performed.  When the API call returns with an error code, there has been an invalid city name used in the search.
 
-### Screen 11: **Different Features**
+### Screen 11: **Error popup in action**
 ![<img src=assets/images/screenshot11.png>](assets/images/screenshot11.png)
 
 15. We will pop a small alert indicating that a search was attempted but that failed.  This alert will be present for 3 seconds and then disappear automatically.
 
-### Screen 12: **Different Features**
+### Screen 12: **After 3 seconds the Error popup is removed**
 ![<img src=assets/images/screenshot12.png>](assets/images/screenshot12.png)
 
 16. After 3 seconds, the interface returns to a normal state.
 
-### Screen 13: **Different Features**
+### Screen 13: **Responsive design thanks to Bulma**
 ![<img src=assets/images/screenshot13.png>](assets/images/screenshot13.png)
 
-* the application is a basic responsive application, resizing and reformating for smaller screen sizes.
+* the application is a basic responsive application, resizing and reformatting for smaller screen sizes.
 
 ## Links
 * This repo is located [on github](https://github.com/jonesjsc/06-Third-Party-APIs-Weather)
