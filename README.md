@@ -17,40 +17,86 @@ The primary objectives of this exercise were to demonstrate the following:
 |Description|Link|
 |-----------|----|
 |Template literals|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals|
+|How to create the alert popup|https://www.youtube.com/watch?v=JaMCxVWtW58|
+|openweathermap api|https://openweathermap.org/|
 
 # Screenshots
 ### Screen 1: **Initial Screen**
-![<img src=assets/images/screen01.png>](assets/images/screen01.png)
+![<img src=assets/images/screenshot01.png>](assets/images/screenshot01.png)
 
-This is a simple calendar appointment entry exercise.
+This is a simple Weather API exercise.  The default city that is shown is Rock Hill.
+### Screen 2: **Basic Features**
+![<img src=assets/images/screenshot02.png>](assets/images/screenshot02.png)
+1. search box
+2. search history
+3. current weather area
+4. 5 day forecast area
+5. Note: this is the CURRENT WEATHER icon, so depending on the time of day this icon might be from the day icon set of the night icon set.
+6. Note: all icons used in the 5 day forcast are from the day icon set.
 
-### Screen 2: **Different Features**
-![<img src=assets/images/screen02.png>](assets/images/screen02.png)
+### Screen 3: **Search History functionality**
+![<img src=assets/images/screenshot03.png>](assets/images/screenshot03.png)
 
-1. Using moment.js, wdisplay the current Date.
-2. When the calendar is rendered, we need to colarize it.  Compare the current time to the time being renders.  This is the block of the calendar for time that is before the current hour.
-3. This is the hour line stylized for the current hour
-4. This is how the calendar is stylized for time in the future.
-5. This is the save button.
+7. when the user enters a search into the search box, it is executed when the ENTER key is pressed.  The search is performed and also saved to the search history area.
 
-### Screen 3: **Data Entry**
-![<img src=assets/images/screen03.png>](assets/images/screen03.png)
+### Screen 4: **openweathermap returns proper capitalization of city names**
+![<img src=assets/images/screenshot04.png>](assets/images/screenshot04.png)
 
-Here is a view of the screen during data entry.
+8. an interesting observation of the openweathermap.org api is that it will return a properly formatted string name of the city whose weather is being searched.  For example, here we type in all lower case "fort mill"
 
 
-### Screen 4: **Post Save**
-![<img src=assets/images/screen04.png>](assets/images/screen04.png)
+### Screen 5: **openweathermap capitalization and pushing search history**
+![<img src=assets/images/screenshot05.png>](assets/images/screenshot05.png)
 
-This is a view once data has been inputted and saved.
+9. the search is executed and we will display the properly capitalized city name.  Notice also that the search order is pushed down in an intuitive manner.
+
+### Screen 6: **actions performed when clicking on search history**
+![<img src=assets/images/screenshot06.png>](assets/images/screenshot06.png)
+
+10. the button class in bulma stylized the mouse pointer to the finger.  When the user clicks on this button:
+
+### Screen 7: **Different Features**
+![<img src=assets/images/screenshot07.png>](assets/images/screenshot07.png)
+
+11. we will perform the search, and pop the searched city to the top of the stack perserving a logical sort order.  Buttons are pushed down in the interface in an intuitive fashion.
+
+### Screen 8: **Different Features**
+![<img src=assets/images/screenshot08.png>](assets/images/screenshot08.png)
+
+12. The interface will preserve the 5 most recent historical searches.
+
+### Screen 9: **Different Features**
+![<img src=assets/images/screenshot09.png>](assets/images/screenshot09.png)
+
+13. When we execute a search for a 6th city, we will truncate the history shoing on the more recent 5 searches.
+
+### Screen 10: **Different Features**
+![<img src=assets/images/screenshot10.png>](assets/images/screenshot10.png)
+
+14. Some basic error catching is performed.  When the API call returns with an error code, there has been an invalid city name used in the search.
+
+### Screen 11: **Different Features**
+![<img src=assets/images/screenshot11.png>](assets/images/screenshot11.png)
+
+15. We will pop a small alert indicating that a search was attempted but that failed.  This alert will be present for 3 seconds and then disappear automatically.
+
+### Screen 12: **Different Features**
+![<img src=assets/images/screenshot12.png>](assets/images/screenshot12.png)
+
+16. After 3 seconds, the interface returns to a normal state.
+
+### Screen 13: **Different Features**
+![<img src=assets/images/screenshot13.png>](assets/images/screenshot13.png)
+
+* the application is a basic responsive application, resizing and reformating for smaller screen sizes.
 
 ## Links
-* This repo is located [on github](https://github.com/jonesjsc/05-Third-Party-APIs-Calendar)
-* This site is deployed on [github pages](https://jonesjsc.github.io/05-Third-Party-APIs-Calendar/)
+* This repo is located [on github](https://github.com/jonesjsc/06-Third-Party-APIs-Weather)
+* This site is deployed on [github pages](https://jonesjsc.github.io/06-Third-Party-APIs-Weather/)
 
 ## License
-* ![License](https://img.shields.io/github/license/jonesjsc/05-Third-Party-APIs-Calenda)
+* ![License](https://img.shields.io/github/license/jonesjsc/06-Third-Party-APIs-Weather)
 
 ## Fun Stats
-* ![Last Commit](https://img.shields.io/github/last-commit/jonesjsc/03-JavaScript-Password-Generator)
+* ![Last Commit](https://img.shields.io/github/last-commit/jonesjsc/06-Third-Party-APIs-Weather)
 * ![Current Understanding level](https://img.shields.io/badge/Understanding%20Level-Gettin%20There-yellow)
