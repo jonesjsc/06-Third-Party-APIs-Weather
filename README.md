@@ -17,7 +17,7 @@ The primary objectives of this exercise were to demonstrate the following:
 |Description|Link|
 |-----------|----|
 |Template literals|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals|
-|How to create the alert popup|https://www.youtube.com/watch?v=JaMCxVWtW58|
+|How i learned to create the alert popup|https://www.youtube.com/watch?v=JaMCxVWtW58|
 |openweathermap api|https://openweathermap.org/|
 
 # Screenshots
